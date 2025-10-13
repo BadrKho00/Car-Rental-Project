@@ -14,5 +14,6 @@ public class Main {
             IO.println("i = " + i);
             System.out.println("Hey Zéa");
         }
+        System.out.println("Test");
     }
 }
