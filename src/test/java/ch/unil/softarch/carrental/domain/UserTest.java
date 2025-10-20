@@ -1,5 +1,6 @@
 package ch.unil.softarch.carrental.domain;
 
+import ch.unil.softarch.carrental.domain.entity.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.UUID;

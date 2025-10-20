@@ -1,4 +1,4 @@
-package ch.unil.softarch.carrental.domain;
+package ch.unil.softarch.carrental.domain.entity;
 
 import java.util.Objects;
 import java.util.UUID;
