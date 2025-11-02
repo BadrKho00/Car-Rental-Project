@@ -20,7 +20,8 @@ public class Customer {
     private double balance;                // Balance for deposits and rental payments
     private LocalDateTime creationDate;    // Account creation timestamp
 
-    // Constructor with all fields
+
+    // Constructor with all fields including password
     public Customer(UUID id, String firstName, String lastName, String email, String password,
                     String phoneNumber, String drivingLicenseNumber, LocalDate drivingLicenseExpiryDate,
                     int age, boolean verifiedIdentity, String billingAddress, double balance,
@@ -93,7 +94,7 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + (password != null ? "***" : null) + '\'' +  // 不直接显示密码
+                ", password='" + (password != null ? "***" : null) + '\'' + // mask password
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
                 ", drivingLicenseExpiryDate=" + drivingLicenseExpiryDate +

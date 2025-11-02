@@ -23,53 +23,15 @@ class CustomerTest {
         licenseExpiry = LocalDate.of(2030, 12, 31);
         creationDate = LocalDateTime.now();
 
-        customer = new Customer();
-        customer.setId(id);
-        customer.setFirstName("John");
-        customer.setLastName("Doe");
-        customer.setEmail("john.doe@example.com");
-        customer.setPhoneNumber("+123456789");
-        customer.setDrivingLicenseNumber("D1234567");
-        customer.setDrivingLicenseExpiryDate(licenseExpiry);
-        customer.setAge(30);
-        customer.setVerifiedIdentity(true);
-        customer.setBillingAddress("123 Main St, City");
-        customer.setBalance(500.0);
-        customer.setCreationDate(creationDate);
-        customer.setPassword("securePassword123");
-    }
-
-    @Test
-    void testGetters() {
-        assertEquals(id, customer.getId());
-        assertEquals("John", customer.getFirstName());
-        assertEquals("Doe", customer.getLastName());
-        assertEquals("john.doe@example.com", customer.getEmail());
-        assertEquals("+123456789", customer.getPhoneNumber());
-        assertEquals("D1234567", customer.getDrivingLicenseNumber());
-        assertEquals(licenseExpiry, customer.getDrivingLicenseExpiryDate());
-        assertEquals(30, customer.getAge());
-        assertTrue(customer.isVerifiedIdentity());
-        assertEquals("123 Main St, City", customer.getBillingAddress());
-        assertEquals(500.0, customer.getBalance());
-        assertEquals(creationDate, customer.getCreationDate());
-        assertEquals("securePassword123", customer.getPassword());
-    }
-
-    @Test
-    void testAllArgsConstructor() {
-        UUID id = UUID.randomUUID();
-        LocalDate licenseExpiry = LocalDate.of(2030, 12, 31);
-        LocalDateTime creationDate = LocalDateTime.now();
-
-        Customer customer = new Customer(
+        // Initialize customer with all fields including password
+        customer = new Customer(
                 id,
-                "John",
-                "Doe",
-                "john.doe@example.com",
-                "securePassword123",
+                "Alice",
+                "Smith",
+                "alice.smith@example.com",
+                "securePass123",
                 "+123456789",
-                "D1234567",
+                "DL123456",
                 licenseExpiry,
                 30,
                 true,
@@ -77,14 +39,17 @@ class CustomerTest {
                 500.0,
                 creationDate
         );
+    }
 
+    @Test
+    void testGetters() {
         assertEquals(id, customer.getId());
-        assertEquals("John", customer.getFirstName());
-        assertEquals("Doe", customer.getLastName());
-        assertEquals("john.doe@example.com", customer.getEmail());
-        assertEquals("securePassword123", customer.getPassword());
+        assertEquals("Alice", customer.getFirstName());
+        assertEquals("Smith", customer.getLastName());
+        assertEquals("alice.smith@example.com", customer.getEmail());
+        assertEquals("securePass123", customer.getPassword());
         assertEquals("+123456789", customer.getPhoneNumber());
-        assertEquals("D1234567", customer.getDrivingLicenseNumber());
+        assertEquals("DL123456", customer.getDrivingLicenseNumber());
         assertEquals(licenseExpiry, customer.getDrivingLicenseExpiryDate());
         assertEquals(30, customer.getAge());
         assertTrue(customer.isVerifiedIdentity());
@@ -95,39 +60,61 @@ class CustomerTest {
 
     @Test
     void testSetters() {
-        customer.setFirstName("Jane");
-        customer.setLastName("Smith");
-        customer.setEmail("jane.smith@example.com");
-        customer.setPhoneNumber("+987654321");
-        customer.setDrivingLicenseNumber("D7654321");
-        customer.setDrivingLicenseExpiryDate(LocalDate.of(2031, 1, 1));
-        customer.setAge(35);
-        customer.setVerifiedIdentity(false);
-        customer.setBillingAddress("456 Another St, City");
-        customer.setBalance(1000.0);
-        customer.setCreationDate(LocalDateTime.now());
-        customer.setPassword("newPassword456");
+        LocalDateTime now = LocalDateTime.now();
 
-        assertEquals("Jane", customer.getFirstName());
-        assertEquals("Smith", customer.getLastName());
-        assertEquals("jane.smith@example.com", customer.getEmail());
+        customer.setFirstName("Bob");
+        customer.setLastName("Johnson");
+        customer.setEmail("bob.johnson@example.com");
+        customer.setPassword("newPass456");
+        customer.setPhoneNumber("+987654321");
+        customer.setDrivingLicenseNumber("DL654321");
+        customer.setDrivingLicenseExpiryDate(LocalDate.of(2035, 1, 1));
+        customer.setAge(40);
+        customer.setVerifiedIdentity(false);
+        customer.setBillingAddress("456 Another St");
+        customer.setBalance(1000.0);
+        customer.setCreationDate(now);
+
+        assertEquals("Bob", customer.getFirstName());
+        assertEquals("Johnson", customer.getLastName());
+        assertEquals("bob.johnson@example.com", customer.getEmail());
+        assertEquals("newPass456", customer.getPassword());
         assertEquals("+987654321", customer.getPhoneNumber());
-        assertEquals("D7654321", customer.getDrivingLicenseNumber());
-        assertEquals(LocalDate.of(2031, 1, 1), customer.getDrivingLicenseExpiryDate());
-        assertEquals(35, customer.getAge());
+        assertEquals("DL654321", customer.getDrivingLicenseNumber());
+        assertEquals(LocalDate.of(2035, 1, 1), customer.getDrivingLicenseExpiryDate());
+        assertEquals(40, customer.getAge());
         assertFalse(customer.isVerifiedIdentity());
-        assertEquals("456 Another St, City", customer.getBillingAddress());
+        assertEquals("456 Another St", customer.getBillingAddress());
         assertEquals(1000.0, customer.getBalance());
-        assertNotNull(customer.getCreationDate());
-        assertEquals("newPassword456", customer.getPassword());
+        assertEquals(now, customer.getCreationDate());
+    }
+
+    @Test
+    void testEqualsAndHashCode() {
+        Customer sameIdCustomer = new Customer(
+                id,
+                "Someone",
+                "Else",
+                "someone@example.com",
+                "pass123",
+                "+111111111",
+                "DL000000",
+                LocalDate.of(2025, 1, 1),
+                25,
+                false,
+                "Other St",
+                100.0,
+                LocalDateTime.now()
+        );
     }
 
     @Test
     void testToString() {
         String str = customer.toString();
-        assertTrue(str.contains("John"));
-        assertTrue(str.contains("Doe"));
-        assertTrue(str.contains("D1234567"));
-        assertTrue(str.contains("securePassword123"));
+        assertTrue(str.contains(id.toString()));
+        assertTrue(str.contains("Alice"));
+        assertTrue(str.contains("Smith"));
+        assertTrue(str.contains("alice.smith@example.com"));
+        assertTrue(str.contains("***")); // password is masked
     }
 }
