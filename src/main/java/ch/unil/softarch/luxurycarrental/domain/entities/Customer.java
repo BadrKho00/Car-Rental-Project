@@ -10,6 +10,7 @@ public class Customer {
     private String firstName;              // Customer first name
     private String lastName;               // Customer last name
     private String email;                  // Email address
+    private String password;               // Login password
     private String phoneNumber;            // Phone number
     private String drivingLicenseNumber;   // Driving license number
     private LocalDate drivingLicenseExpiryDate; // Driving license expiry date
@@ -20,14 +21,15 @@ public class Customer {
     private LocalDateTime creationDate;    // Account creation timestamp
 
     // Constructor with all fields
-    public Customer(UUID id, String firstName, String lastName, String email, String phoneNumber,
-                    String drivingLicenseNumber, LocalDate drivingLicenseExpiryDate,
+    public Customer(UUID id, String firstName, String lastName, String email, String password,
+                    String phoneNumber, String drivingLicenseNumber, LocalDate drivingLicenseExpiryDate,
                     int age, boolean verifiedIdentity, String billingAddress, double balance,
                     LocalDateTime creationDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password;
         this.phoneNumber = phoneNumber;
         this.drivingLicenseNumber = drivingLicenseNumber;
         this.drivingLicenseExpiryDate = drivingLicenseExpiryDate;
@@ -56,6 +58,9 @@ public class Customer {
 
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
 
     public String getPhoneNumber() { return phoneNumber; }
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
@@ -88,6 +93,7 @@ public class Customer {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + (password != null ? "***" : null) + '\'' +  // 不直接显示密码
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", drivingLicenseNumber='" + drivingLicenseNumber + '\'' +
                 ", drivingLicenseExpiryDate=" + drivingLicenseExpiryDate +
